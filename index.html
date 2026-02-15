@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz Master | Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="auth-container">
+
+    <div class="logo">🎯</div>
+    <h1>Quiz Master</h1>
+    <p class="subtitle">Test your knowledge across multiple categories</p>
+
+    <div class="toggle">
+      <button class="toggle-btn active" type="button">Login</button>
+      <button class="toggle-btn" type="button" onclick="goToSignup()">
+         Sign Up
+</button>
+
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form class="form" onsubmit="loginUser(event)">
+      <label>Email Address</label>
+      <input id="email" type="email" placeholder="john@example.com" required />
+
+      <label>Password</label>
+      <input id="password" type="password" placeholder="Enter your password" required />
+
+      <button class="submit-btn" type="submit">
+        Login to Your Account
+      </button>
+    </form>
+
+  </div>
+
+  <!-- FIREBASE + LOGIN LOGIC -->
+  <script type="module">
+    // 🔹 Import Firebase modules (REQUIRED)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } 
+      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // 🔹 Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyC02WxGlk41JhJ3rV3lagxMIKnhakESg2E",
+      authDomain: "quizproject-24f19.firebaseapp.com",
+      projectId: "quizproject-24f19",
+      storageBucket: "quizproject-24f19.appspot.com",
+      messagingSenderId: "737449040432",
+      appId: "1:737449040432:web:f80840da1b6b64bf332bf5"
+    };
+
+    // 🔹 Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // 🔹 Login function
+    window.loginUser = function (event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          window.location.href = "dashboard.html";
+        })
+        .catch(error => {
+          alert(error.message);
+        });
+    };
+
+    window.goToSignup = function () {
+  window.location.href = "signup.html";
+   };
+
+  </script>
+  
+
+</body>
+</html>

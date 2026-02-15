@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+<div class="quiz-card">
+
+    <div class="quiz-top">
+        <h2 id="quizTitle">🌍 Geography</h2>
+        <span id="counter">1/5</span>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <h3 class="question" id="question">
+        Which is the longest river in the world?
+    </h3>
+
+    <div class="options" id="options">
+        <!-- Options injected by JS -->
+    </div>
+
+    <div class="quiz-footer">
+        <button class="quit" onclick="quitQuiz()">Quit Quiz</button>
+        <button class="submit" onclick="nextQuestion()">Submit Answer</button>
+    </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="quiz.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz Master | Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="auth-container">
+
+    <div class="logo">🎯</div>
+    <h1>Create Account</h1>
+    <p class="subtitle">Join Quiz Master</p>
+
+    <!-- SIGN UP FORM -->
+    <form class="form" onsubmit="registerUser(event)">
+      <label>Username</label>
+      <input id="username" type="text" placeholder="Your name" required />
+
+      <label>Email Address</label>
+      <input id="email" type="email" placeholder="john@example.com" required />
+
+      <label>Password</label>
+      <input id="password" type="password" placeholder="Minimum 6 characters" required />
+
+      <button class="submit-btn" type="submit">
+        Create Account
+      </button>
+    </form>
+
+    <p class="subtitle">
+      Already have an account?
+      <a href="index.html">Login</a>
+    </p>
+
+  </div>
+
+  <!-- FIREBASE SIGNUP LOGIC -->
+ <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    updateProfile
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import {
+    getDatabase,
+    ref,
+    set
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC02WxGlk41JhJ3rV3lagxMIKnhakESg2E",
+    authDomain: "quizproject-24f19.firebaseapp.com",
+    projectId: "quizproject-24f19",
+    storageBucket: "quizproject-24f19.appspot.com",
+    messagingSenderId: "737449040432",
+    appId: "1:737449040432:web:f80840da1b6b64bf332bf5"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getDatabase(app);
+
+  window.registerUser = async function (event) {
+    event.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+      // 🔐 Create user
+      const userCredential =
+        await createUserWithEmailAndPassword(auth, email, password);
+
+      const user = userCredential.user;
+
+      // 👤 Save username in Auth profile
+      await updateProfile(user, {
+        displayName: username
+      });
+
+      // 💾 SAVE USER DATA IN REALTIME DATABASE
+      await set(ref(db, "users/" + user.uid), {
+        username: username,
+        email: email,
+        createdAt: Date.now()
+      });
+
+      alert("Account created successfully!");
+      window.location.href = "dashboard.html";
+
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+</script>
+
+
+</body>
+</html>

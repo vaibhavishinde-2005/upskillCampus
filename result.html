@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz Result</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="result.css"/>
+</head>
+<body>
+
+  <div class="container">
+    <div class="star">⭐</div>
+
+    <h1>Quiz Complete!</h1>
+    <p class="subtitle" id="result-message">Great job! Keep it up!</p>
+
+    <div class="score-card">
+      <p class="label">YOUR SCORE</p>
+      <h2 id="score-text">0<span>/0</span></h2>
+      <p class="percent" id="score-percent">0%</p>
+    </div>
+
+    <button class="btn primary" onclick="restartQuiz()">Try Again</button>
+    <button class="btn secondary" onclick="goToDashboard()">Back to Dashboard</button>
+  </div>
+
+ <script type="module" src="result.js"></script>
+
+</body>
+</html>

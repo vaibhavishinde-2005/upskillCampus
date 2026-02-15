@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div>
+           <h1 id="welcome">Welcome 👋</h1>
+            <p>Your Quiz Dashboard</p>
+        </div>
+        <button class="logout">Logout</button>
+    </div>
+
+    <!-- CATEGORIES -->
+    <h2 class="section-title">Choose a Category</h2>
+
+    <div class="categories">
+
+        <div class="category" onclick="openQuiz('general_knowledge')">
+    <span class="cat-icon">🧠</span>
+    <h3>General Knowledge</h3>
+    <p>0 attempts</p>
+    <div class="status">Not attempted yet</div>
+</div>
+
+
+        <div class="category" onclick="openQuiz('history')">
+            <span class="cat-icon">📜</span>
+            <h3>History</h3>
+            <p>0 attempts</p>
+            <div class="status">Not attempted yet</div>
+        </div>
+
+        <div class="category" onclick="openQuiz('science')">
+            <span class="cat-icon">🔬</span>
+            <h3>Science</h3>
+            <p>0 attempts</p>
+            <div class="status">Not attempted yet</div>
+        </div>
+
+        <div class="category" onclick="openQuiz('geography')">
+            <span class="cat-icon">🌍</span>
+            <h3>Geography</h3>
+            <p>0 attempts</p>
+            <div class="status">Not attempted yet</div>
+        </div>
+
+        <div class="category" onclick="openQuiz('mathematics')">
+            <span class="cat-icon">🔢</span>
+            <h3>Mathematics</h3>
+            <p>0 attempts</p>
+            <div class="status">Not attempted yet</div>
+        </div>
+
+        <div class="category" onclick="openQuiz('sports')">
+            <span class="cat-icon">⚽</span>
+            <h3>Sports</h3>
+            <p>0 attempts</p>
+            <div class="status">Not attempted yet</div>
+        </div>
+
+        <div class="category" onclick="openQuiz('literature')">
+            <span class="cat-icon">📚</span>
+            <h3>Literature</h3>
+            <p>0 attempts</p>
+            <div class="status">Not attempted yet</div>
+        </div>
+
+        <div class="category" onclick="openQuiz('movies_tv')">
+            <span class="cat-icon">🎬</span>
+            <h3>Movies & TV</h3>
+            <p>0 attempts</p>
+            <div class="status">Not attempted yet</div>
+        </div>
+
+    </div>
+
+  
+
+</div>
+
+<script src="dashboard.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut }
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getDatabase, ref, get }
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+  // 🔹 Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyC02WxGlk41JhJ3rV3lagxMIKnhakESg2E",
+    authDomain: "quizproject-24f19.firebaseapp.com",
+    projectId: "quizproject-24f19",
+    storageBucket: "quizproject-24f19.appspot.com",
+    messagingSenderId: "737449040432",
+    appId: "1:737449040432:web:f80840da1b6b64bf332bf5"
+  };
+
+  // 🔹 Init Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getDatabase(app);
+
+  // 🔐 Auth guard + fetch username
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "index.html";
+      return;
+    }
+
+    try {
+      // 🔥 READ USER DATA FROM REALTIME DB
+      const snapshot = await get(ref(db, "users/" + user.uid));
+
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        document.getElementById("welcome").innerText =
+          `Welcome back, ${data.username}! 👋`;
+      } else {
+        // fallback
+        document.getElementById("welcome").innerText =
+          "Welcome back! 👋";
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  // 🚪 Logout
+  document.querySelector(".logout").addEventListener("click", () => {
+    signOut(auth).then(() => {
+      window.location.href = "index.html";
+    });
+  });
+</script>
+
+
+
+</body>
+</html>
