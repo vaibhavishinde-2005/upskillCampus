@@ -31,15 +31,15 @@ This platform allows users to sign up, log in, attempt quizzes from different ca
 
 
 ## 📊 Dashboard
-<img width="1564" height="889" alt="image" src="https://github.com/user-attachments/assets/96731920-b5c6-40ce-a012-39a8b33ac4cd" />
+<img width="1564" height="700" alt="image" src="https://github.com/user-attachments/assets/96731920-b5c6-40ce-a012-39a8b33ac4cd" />
 
 
 ## 📝 Quiz Page
-<img width="1109" height="834" alt="image" src="https://github.com/user-attachments/assets/d4d58308-9209-46fc-9dfd-b0f434e631c7" />
+<img width="653" height="700" alt="image" src="https://github.com/user-attachments/assets/d4d58308-9209-46fc-9dfd-b0f434e631c7" />
 
 
 ## 🏆 Result Page
-<img width="603" height="745" alt="image" src="https://github.com/user-attachments/assets/64b5553a-98f5-4493-81ab-612fef68de4f" />
+<img width="656" height="700" alt="image" src="https://github.com/user-attachments/assets/64b5553a-98f5-4493-81ab-612fef68de4f" />
 
 
 
